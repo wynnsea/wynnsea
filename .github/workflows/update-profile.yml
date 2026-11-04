@@ -1,0 +1,29 @@
+name: Update profile
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at 07:00 WIB
+  workflow_dispatch: # adds a Run workflow button in the Actions tab
+  push:
+    branches: [main]
+    paths: ["scripts/**", ".github/workflows/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refresh commit chart and projects table
+        run: python3 scripts/update_profile.py
+        env:
+          # Set the optional PROFILE_TOKEN secret to count private commits too.
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets README.md
+          git diff --cached --quiet || { git commit -m "Update profile data" && git push; }
