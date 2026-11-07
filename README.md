@@ -21,10 +21,10 @@ Hi, I'm Wynn. I build calm, fast web apps from Bekasi, mostly backend services a
 <!-- projects:start -->
 | Project | Built with |
 | :--- | :--- |
+| [ai-portfolio](https://github.com/wynnsea/ai-portfolio) | TypeScript |
 | [ai-audit](https://github.com/wynnsea/ai-audit) | TypeScript |
 | [ai-audit-service](https://github.com/wynnsea/ai-audit-service) | Go |
 | [ringgit-catering](https://github.com/wynnsea/ringgit-catering) | TypeScript |
-| [ai-portfolio](https://github.com/wynnsea/ai-portfolio) | TypeScript |
 <!-- projects:end -->
 
 ### Commit tide
