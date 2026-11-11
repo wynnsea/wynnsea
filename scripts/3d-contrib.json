@@ -1,0 +1,20 @@
+{
+  "type": "normal",
+  "fileName": "profile-sea.svg",
+  "backgroundColor": "#ffffff",
+  "foregroundColor": "#12324A",
+  "strongColor": "#B3126F",
+  "weakColor": "#3D6478",
+  "radarColor": "#2A7AA0",
+  "growingAnimation": true,
+  "contribColors": ["#E3EEF2", "#A8D2E3", "#5BA8C8", "#2A7AA0", "#12324A"],
+  "darkMode": {
+    "type": "normal",
+    "backgroundColor": "#0C2638",
+    "foregroundColor": "#E9F3F2",
+    "strongColor": "#F06CB8",
+    "weakColor": "#86AEBF",
+    "radarColor": "#5BC0EB",
+    "contribColors": ["#163A51", "#1F5F7F", "#2E8BB0", "#5BC0EB", "#A8E4F7"]
+  }
+}

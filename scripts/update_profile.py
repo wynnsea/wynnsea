@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refreshes the profile from GitHub: the commit tide chart and the projects table.
+"""Refreshes the profile from GitHub: the dive log card, the commit tide chart and the projects table.
 
 Needs a token in GH_TOKEN. GitHub Actions provides one automatically.
 To run it locally: GH_TOKEN=$(gh auth token) python3 scripts/update_profile.py
@@ -78,6 +78,37 @@ def svg(t, commits):
 '''
 
 
+CARD_THEMES = {
+    "light": dict(bg="#FFFFFF", border="#C2E0EB", title="#12324A", label="#3D6478", value="#12324A",
+                  ring="#A8D2E3", accent="#B3126F"),
+    "dark": dict(bg="#0C2638", border="#1C4760", title="#5BC0EB", label="#86AEBF", value="#E9F3F2",
+                 ring="#1C4760", accent="#F06CB8"),
+}
+
+
+def dive_log(t, log):
+    """Stats card sized like the streak card so the two stack neatly."""
+    rows = [("Stars earned", log["stars"]), ("Commits, last 12 months", log["commits"]),
+            ("Pull requests", log["pulls"]), ("Issues opened", log["issues"]),
+            ("Contributed to", log["repos"])]
+    lines = "".join(
+        f'<text x="28" y="{78 + i * 25}" fill="{t["label"]}" font-size="14">{label}</text>'
+        f'<text x="290" y="{78 + i * 25}" text-anchor="end" fill="{t["value"]}" font-size="14" font-weight="700">{value:,}</text>'
+        for i, (label, value) in enumerate(rows)
+    )
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495 195" width="495" height="195" role="img" aria-label="Dive log: {log["total"]:,} contributions in the last year" font-family="'Segoe UI',Ubuntu,'Helvetica Neue',sans-serif">
+<rect x=".5" y=".5" width="494" height="194" rx="8" fill="{t["bg"]}" stroke="{t["border"]}"/>
+<text x="28" y="40" fill="{t["title"]}" font-size="19" font-style="italic" font-family="Georgia,'Times New Roman',serif">{USERNAME}'s dive log</text>
+{lines}
+<circle cx="398" cy="104" r="54" fill="none" stroke="{t["ring"]}" stroke-width="8"/>
+<circle cx="398" cy="104" r="44" fill="none" stroke="{t["accent"]}" stroke-width="1.5" stroke-dasharray="3 5"/>
+<text x="398" y="104" text-anchor="middle" fill="{t["value"]}" font-size="26" font-weight="700">{log["total"]:,}</text>
+<text x="398" y="121" text-anchor="middle" fill="{t["label"]}" font-size="11">contributions</text>
+<text x="398" y="133" text-anchor="middle" fill="{t["label"]}" font-size="11">past year</text>
+</svg>
+'''
+
+
 def graphql(query):
     token = os.environ.get("GH_TOKEN")
     if not token:
@@ -121,6 +152,12 @@ def fetch(now):
     user = graphql(f"""{{ user(login: "{USERNAME}") {{
         {ranges}
         pinnedItems(first: 6, types: REPOSITORY) {{ nodes {{ ... on Repository {{ {REPO_FIELDS} }} }} }}
+        contributionsCollection {{
+            totalCommitContributions totalPullRequestContributions totalIssueContributions
+            contributionCalendar {{ totalContributions }}
+        }}
+        repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, PULL_REQUEST, ISSUE, REPOSITORY]) {{ totalCount }}
+        starred: repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false) {{ nodes {{ stargazerCount }} }}
         repositories(first: 7, ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false,
                      orderBy: {{field: PUSHED_AT, direction: DESC}}) {{ nodes {{ {REPO_FIELDS} }} }}
     }} }}""")
@@ -129,7 +166,17 @@ def fetch(now):
     # A token that can read private repos could return private pins, so those are always dropped.
     pinned = [r for r in user["pinnedItems"]["nodes"] if not r["isPrivate"]]
     recent = [r for r in user["repositories"]["nodes"] if r["name"] != USERNAME][:6]
-    return commits, pinned or recent
+    year = user["contributionsCollection"]
+    log = {
+        "stars": sum(r["stargazerCount"] for r in user["starred"]["nodes"]),
+        # Same monthly windows as the tide chart, so both show one number.
+        "commits": sum(v for _, v in commits),
+        "pulls": year["totalPullRequestContributions"],
+        "issues": year["totalIssueContributions"],
+        "repos": user["repositoriesContributedTo"]["totalCount"],
+        "total": year["contributionCalendar"]["totalContributions"],
+    }
+    return commits, pinned or recent, log
 
 
 def cell(text):
@@ -159,11 +206,12 @@ def write_projects(repos):
 
 
 def main():
-    commits, repos = fetch(datetime.now(timezone.utc))
+    commits, repos, log = fetch(datetime.now(timezone.utc))
     for name, theme in THEMES.items():
         (ROOT / "assets" / f"tide-{name}.svg").write_text(svg(theme, commits))
+        (ROOT / "assets" / f"divelog-{name}.svg").write_text(dive_log(CARD_THEMES[name], log))
     write_projects(repos)
-    print(f"{sum(v for _, v in commits)} commits, {len(repos)} projects")
+    print(f"{sum(v for _, v in commits)} commits, {len(repos)} projects, {log}")
 
 
 if __name__ == "__main__":

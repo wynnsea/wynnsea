@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495 195" width="495" height="195" role="img" aria-label="Dive log: 46 contributions in the last year" font-family="'Segoe UI',Ubuntu,'Helvetica Neue',sans-serif">
+<rect x=".5" y=".5" width="494" height="194" rx="8" fill="#FFFFFF" stroke="#C2E0EB"/>
+<text x="28" y="40" fill="#12324A" font-size="19" font-style="italic" font-family="Georgia,'Times New Roman',serif">wynnsea's dive log</text>
+<text x="28" y="78" fill="#3D6478" font-size="14">Stars earned</text><text x="290" y="78" text-anchor="end" fill="#12324A" font-size="14" font-weight="700">0</text><text x="28" y="103" fill="#3D6478" font-size="14">Commits, last 12 months</text><text x="290" y="103" text-anchor="end" fill="#12324A" font-size="14" font-weight="700">16</text><text x="28" y="128" fill="#3D6478" font-size="14">Pull requests</text><text x="290" y="128" text-anchor="end" fill="#12324A" font-size="14" font-weight="700">0</text><text x="28" y="153" fill="#3D6478" font-size="14">Issues opened</text><text x="290" y="153" text-anchor="end" fill="#12324A" font-size="14" font-weight="700">0</text><text x="28" y="178" fill="#3D6478" font-size="14">Contributed to</text><text x="290" y="178" text-anchor="end" fill="#12324A" font-size="14" font-weight="700">2</text>
+<circle cx="398" cy="104" r="54" fill="none" stroke="#A8D2E3" stroke-width="8"/>
+<circle cx="398" cy="104" r="44" fill="none" stroke="#B3126F" stroke-width="1.5" stroke-dasharray="3 5"/>
+<text x="398" y="104" text-anchor="middle" fill="#12324A" font-size="26" font-weight="700">46</text>
+<text x="398" y="121" text-anchor="middle" fill="#3D6478" font-size="11">contributions</text>
+<text x="398" y="133" text-anchor="middle" fill="#3D6478" font-size="11">past year</text>
+</svg>
