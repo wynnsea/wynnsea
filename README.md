@@ -69,7 +69,6 @@
 | [ai-audit](https://github.com/wynnsea/ai-audit) | TypeScript |
 | [ai-audit-service](https://github.com/wynnsea/ai-audit-service) | Go |
 | [ai-portfolio](https://github.com/wynnsea/ai-portfolio) | TypeScript |
-| [ringgit-catering](https://github.com/wynnsea/ringgit-catering) | TypeScript |
 <!-- projects:end -->
 
 <hr>
