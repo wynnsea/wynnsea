@@ -66,6 +66,7 @@
 <!-- projects:start -->
 | Project | Built with |
 | :--- | :--- |
+| [synseafy](https://github.com/wynnsea/synseafy) | TypeScript |
 | [ai-audit](https://github.com/wynnsea/ai-audit) | TypeScript |
 | [ai-audit-service](https://github.com/wynnsea/ai-audit-service) | Go |
 | [ai-portfolio](https://github.com/wynnsea/ai-portfolio) | TypeScript |
