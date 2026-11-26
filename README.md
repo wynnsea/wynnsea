@@ -42,6 +42,7 @@ Backend developer focused on web services, APIs, and small developer tools.
 <!-- projects:start -->
 | Project | Built with |
 | :--- | :--- |
+| [smart-home](https://github.com/wynnsea/smart-home) | Dart |
 | [ai-portfolio](https://github.com/wynnsea/ai-portfolio) | TypeScript |
 | [inventory-manajemen](https://github.com/wynnsea/inventory-manajemen) | PHP |
 | [synseafy](https://github.com/wynnsea/synseafy) | TypeScript |
