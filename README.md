@@ -42,12 +42,12 @@ Backend developer focused on web services, APIs, and small developer tools.
 <!-- projects:start -->
 | Project | Built with |
 | :--- | :--- |
-| [smart-home](https://github.com/wynnsea/smart-home) | Dart |
 | [ai-portfolio](https://github.com/wynnsea/ai-portfolio) | TypeScript |
+| [vibe-coding-app](https://github.com/wynnsea/vibe-coding-app) | Dart |
+| [wynndev-server-agent](https://github.com/wynnsea/wynndev-server-agent) | CSS |
+| [wynndiff-bridge](https://github.com/wynnsea/wynndiff-bridge) | Go |
 | [inventory-manajemen](https://github.com/wynnsea/inventory-manajemen) | PHP |
 | [synseafy](https://github.com/wynnsea/synseafy) | TypeScript |
-| [ai-audit](https://github.com/wynnsea/ai-audit) | TypeScript |
-| [ai-audit-service](https://github.com/wynnsea/ai-audit-service) | Go |
 <!-- projects:end -->
 
 ### Stack
